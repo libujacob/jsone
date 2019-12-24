@@ -1,7 +1,10 @@
 Jsongo
 ===================
 
-**Fluent API** to make it easier **to create Json** objects.
+**Fluent API** to make it easier **to parse and create Json** objects.
+
+This **single framework** allows you to **parse and dynamically create/modify
+Json** in GoLang.
 
 [![travis-ci](https://travis-ci.org/ricardolonga/jsongo.svg)](https://travis-ci.org/ricardolonga/jsongo) 
 [![codecov](https://codecov.io/gh/ricardolonga/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/ricardolonga/jsongo)
@@ -10,11 +13,13 @@ Jsongo
 Install
 -------------
 ```
-go get github.com/ricardolonga/jsongo
+go get github.com/libujacob/jsongo
 ```
 
 Usage
 -------------
+### Create Json
+
 To create this:  
 ```
 {  
@@ -74,7 +79,70 @@ array := j.Array().Put("Android").
 array.Size() // Result is 3.
 ```
 
+### Parse Json
+Json can be directly of Object or Array type. Both can be parsed using two 
+different APIs which are mentioned below. After parsing you can use all the above 
+said operations on the return value. 
+
+##### Parse a Json Object string:
+```
+parsedObject := ParseJsonObject([]byte(`{"type": "oper", "nameList":["John", "Dan"], "id":205896}`))
+/*{
+    "type": "oper",
+    "nameList": [
+      "John",
+      "Dan"
+    ],
+    "id": 205896
+  }*/
+
+parsedObject.Put("dept", "Operations")
+/*{
+    "type": "oper",
+    "nameList": [
+      "John",
+      "Dan"
+    ],
+    "id": 205896,
+    "dept": "Operations"
+  }*/
+```
+##### Parse a Json Array string:
+```
+parsedArray := ParseJsonArray([]byte(`[{"name": "John", "id": 567314}, {"name": "Dan", "id": 589725}]`))
+/*[
+    {
+      "name": "John",
+      "id": 567314
+    },
+    {
+      "name": "Dan",
+      "id": 589725
+    }
+  ]*/
+
+parsedArray.Put(j.Object().Put("name", "Tom").Put("id", 589289)
+/*[
+    {
+      "name": "John",
+      "id": 567314
+    },
+    {
+      "name": "Dan",
+      "id": 589725
+    },
+    {
+      "name": "Tom",
+      "id": 589289
+    }
+  ]*/
+```
+
 Copyright
 -------------
-Copyright (c) 2015 Ricardo Longa.  
+Original work Copyright (c) 2015 Ricardo Longa.  
+Modified work Copyright (c) 2019 Libu Jacob Varghese.  
+
+Using bramp.net/antlr4/json and antlr for json parsing.
+
 Jsongo is licensed under the **Apache License Version 2.0**. See the LICENSE file for more information.
