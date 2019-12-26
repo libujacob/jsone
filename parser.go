@@ -162,7 +162,7 @@ func insertIntoStackTopValue(l *jsonListener, key string, value interface{}) {
 		break
 
 	default:
-		//log.Print("Not a proper data type expected here")
+		// log.Print("Not a proper data type expected here")
 		break
 	}
 }

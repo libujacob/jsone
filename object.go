@@ -2,8 +2,8 @@ package jsongo
 
 import (
 	"errors"
-	"reflect"
 	"fmt"
+	"reflect"
 )
 
 type O map[string]interface{}
@@ -21,13 +21,41 @@ func (this O) Get(key string) interface{} {
 	return this[key]
 }
 
+func (this O) GetString(key string) (string, error) {
+	if reflect.TypeOf(this[key]).Kind() == reflect.String {
+		return this[key].(string), nil
+	}
+	return "", &JsonError{op: "GetString", element: key, msg: "type miss-match."}
+}
+
+func (this O) GetInt(key string) (int, error) {
+	if reflect.TypeOf(this[key]).Kind() == reflect.Int {
+		return this[key].(int), nil
+	}
+	return 0, &JsonError{op: "GetInt", element: key, msg: "type miss-match."}
+}
+
+func (this O) GetFloat64(key string) (float64, error) {
+	if reflect.TypeOf(this[key]).Kind() == reflect.Float64 {
+		return this[key].(float64), nil
+	}
+	return 0.0, &JsonError{op: "GetFloat64", element: key, msg: "type miss-match."}
+}
+
+func (this O) GetBoolean(key string) (bool, error) {
+	if reflect.TypeOf(this[key]).Kind() == reflect.Bool {
+		return this[key].(bool), nil
+	}
+	return false, &JsonError{op: "GetBoolean", element: key, msg: "type miss-match."}
+}
+
 func (this O) GetObject(key string) (value O, err error) {
 	switch this[key].(type) {
 	case map[string]interface{}:
 		object := Object()
 
-		for k,v := range this[key].(map[string]interface{}) {
-			object.Put(k,v)
+		for k, v := range this[key].(map[string]interface{}) {
+			object.Put(k, v)
 		}
 
 		return object, nil
