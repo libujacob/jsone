@@ -35,7 +35,7 @@ To create this:
 Do this:  
 ```
 import (
-    j "github.com/ricardolonga/jsongo"
+    j "github.com/libujacob/jsongo"
 )
 
 json := j.Object().Put("name", "Ricardo Longa").
@@ -86,7 +86,11 @@ said operations on the return value.
 
 ##### Parse a Json Object string:
 ```
-parsedObject := ParseJsonObject([]byte(`{"type": "oper", "nameList":["John", "Dan"], "id":205896}`))
+import (
+    j "github.com/libujacob/jsongo"
+)
+
+parsedObject := j.ParseJsonObject([]byte(`{"type": "oper", "nameList":["John", "Dan"], "id":205896}`))
 /*{
     "type": "oper",
     "nameList": [
@@ -109,7 +113,11 @@ parsedObject.Put("dept", "Operations")
 ```
 ##### Parse a Json Array string:
 ```
-parsedArray := ParseJsonArray([]byte(`[{"name": "John", "id": 567314}, {"name": "Dan", "id": 589725}]`))
+import (
+    j "github.com/libujacob/jsongo"
+)
+
+parsedArray := j.ParseJsonArray([]byte(`[{"name": "John", "id": 567314}, {"name": "Dan", "id": 589725}]`))
 /*[
     {
       "name": "John",
