@@ -22,21 +22,34 @@ func (this O) Get(key string) interface{} {
 }
 
 func (this O) GetString(key string) (string, error) {
-	if reflect.TypeOf(this[key]).Kind() == reflect.String {
+	switch this[key].(type) {
+	case string:
 		return this[key].(string), nil
 	}
 	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(this[key])))
 }
 
 func (this O) GetInt(key string) (int, error) {
-	if reflect.TypeOf(this[key]).Kind() == reflect.Int {
+	switch this[key].(type) {
+	case int:
 		return this[key].(int), nil
 	}
+
 	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(this[key])))
 }
 
+func (this O) GetInt64(key string) (int64, error) {
+	switch this[key].(type) {
+	case int64:
+		return this[key].(int64), nil
+	}
+
+	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(this[key])))
+}
+
 func (this O) GetFloat64(key string) (float64, error) {
-	if reflect.TypeOf(this[key]).Kind() == reflect.Float64 {
+	switch this[key].(type) {
+	case float64:
 		return this[key].(float64), nil
 	}
 	return 0.0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not float64", key,
@@ -44,7 +57,8 @@ func (this O) GetFloat64(key string) (float64, error) {
 }
 
 func (this O) GetBoolean(key string) (bool, error) {
-	if reflect.TypeOf(this[key]).Kind() == reflect.Bool {
+	switch this[key].(type) {
+	case bool:
 		return this[key].(bool), nil
 	}
 
