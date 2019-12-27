@@ -25,28 +25,30 @@ func (this O) GetString(key string) (string, error) {
 	if reflect.TypeOf(this[key]).Kind() == reflect.String {
 		return this[key].(string), nil
 	}
-	return "", &JsonError{op: "GetString", element: key, msg: "type miss-match."}
+	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(this[key])))
 }
 
 func (this O) GetInt(key string) (int, error) {
 	if reflect.TypeOf(this[key]).Kind() == reflect.Int {
 		return this[key].(int), nil
 	}
-	return 0, &JsonError{op: "GetInt", element: key, msg: "type miss-match."}
+	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(this[key])))
 }
 
 func (this O) GetFloat64(key string) (float64, error) {
 	if reflect.TypeOf(this[key]).Kind() == reflect.Float64 {
 		return this[key].(float64), nil
 	}
-	return 0.0, &JsonError{op: "GetFloat64", element: key, msg: "type miss-match."}
+	return 0.0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not float64", key,
+		reflect.TypeOf(this[key])))
 }
 
 func (this O) GetBoolean(key string) (bool, error) {
 	if reflect.TypeOf(this[key]).Kind() == reflect.Bool {
 		return this[key].(bool), nil
 	}
-	return false, &JsonError{op: "GetBoolean", element: key, msg: "type miss-match."}
+
+	return false, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(this[key])))
 }
 
 func (this O) GetObject(key string) (value O, err error) {
@@ -63,7 +65,8 @@ func (this O) GetObject(key string) (value O, err error) {
 		return this[key].(O), nil
 	}
 
-	return nil, errors.New(fmt.Sprintf("Casting error. Interface is %s, not jsongo.object", reflect.TypeOf(this[key])))
+	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.object",
+		key, reflect.TypeOf(this[key])))
 }
 
 func (this O) GetArray(key string) (newArray *A, err error) {
@@ -90,7 +93,8 @@ func (this O) GetArray(key string) (newArray *A, err error) {
 		return this[key].(*A), nil
 	}
 
-	return nil, errors.New(fmt.Sprintf("Casting error. Interface is %s, not jsongo.A or []interface{}", reflect.TypeOf(this[key])))
+	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.A or []interface{}",
+		key, reflect.TypeOf(this[key])))
 }
 
 func (this O) Remove(key string) O {
