@@ -1,9 +1,9 @@
 package jsongo
 
 import (
-	"testing"
 	"bytes"
 	"strings"
+	"testing"
 )
 
 func Test_create_empty_object(t *testing.T) {
@@ -83,7 +83,7 @@ func Test_get_object_without_casting_error(t *testing.T) {
 	}
 
 	obj = Object().Put("owner", map[string]interface{}{
-		"nome":"Ricardo Longa",
+		"nome": "Ricardo Longa",
 	})
 
 	obj, err = obj.GetObject("owner")
@@ -132,5 +132,21 @@ func Test_get_array_with_casting_error(t *testing.T) {
 
 	if _, err := obj.GetArray("owner"); err == nil {
 		t.Errorf("Casting error not found.")
+	}
+}
+
+func Test_has_key_exists(t *testing.T) {
+	obj := Object().Put("owner", Object().Put("name", "Jacob Varghese"))
+
+	if !obj.Has("owner") {
+		t.Errorf("Has key error, key not exists.")
+	}
+}
+
+func Test_has_key_not_exists(t *testing.T) {
+	obj := Object().Put("owner", Object().Put("name", "Jacob Varghese"))
+
+	if obj.Has("operations") {
+		t.Errorf("Has key error, key exists.")
 	}
 }
