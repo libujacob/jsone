@@ -63,6 +63,29 @@ json.Remove("skills")
 ```
 json.Get("skills") // Return is interface{}.
 ```
+##### To get string field of the object:
+```
+skill, err := json.GetString("skills") // Return is string, error
+```
+##### To get int/int64 field of the object:
+```
+count, err := json.GetInt("count") // Return is int, error
+bytes, err := json.GetInt64("bytes") // Return is int64, error
+```
+##### To get float64 field of the object:
+```
+average, err := json.GetFloat64("average") // Return is float64, error
+```
+##### To get boolean field of the object:
+```
+isDownSupport, err := json.GetBoolean("isDownloadSupported") // Return is boolean, error
+```
+##### To check the object has a key:
+```
+if json.Has("operations") { // Return is boolean
+    //do something
+}
+```
 ##### To range over a array:
 ```
 results := Array().Put("Golang").Put("Android").Put("Java")
