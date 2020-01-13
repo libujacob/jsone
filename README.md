@@ -1,14 +1,11 @@
 Jsongo
 ===================
 
-**Fluent API** to make it easier **to parse and create Json** objects.
+**Single framework to parse and dynamically create/modify Json** objects.
 
-This **single framework** allows you to **parse and dynamically create/modify
-Json** in GoLang.
-
-[![travis-ci](https://travis-ci.org/ricardolonga/jsongo.svg)](https://travis-ci.org/ricardolonga/jsongo) 
-[![codecov](https://codecov.io/gh/ricardolonga/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/ricardolonga/jsongo)
-[![goreportcard](https://goreportcard.com/badge/github.com/ricardolonga/jsongo)](http://gocover.io/github.com/ricardolonga/jsongo)
+[![travis-ci](https://travis-ci.org/libujacob/jsongo.svg)](https://travis-ci.org/libujacob/jsongo) 
+[![codecov](https://codecov.io/gh/libujacob/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsongo)
+[![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsongo)](http://gocover.io/github.com/libujacob/jsongo)
 
 Install
 -------------
