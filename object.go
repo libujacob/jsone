@@ -6,27 +6,27 @@ import (
 	"reflect"
 )
 
-// Json Object.
+// O represents a Json Object.
 type O map[string]interface{}
 
-// Create a json object.
+// Object creates a json object.
 func Object() O {
 	return O{}
 }
 
-// Insert an element into a json object.
+// Put inserts an element into a json object.
 func (jObj O) Put(key string, value interface{}) O {
 	jObj[key] = value
 	return jObj
 }
 
-// Retrieve an element from a json object. Type of the return value is not predefined,
+// Get retrieves an element from a json object. Type of the return value is not predefined,
 // caller has to check the return type.
 func (jObj O) Get(key string) interface{} {
 	return jObj[key]
 }
 
-// Get a string data from a json object. Return error, if key not exist or data type not string.
+// GetString retrieves a string data from a json object. Return error, if key not exist or data type not string.
 func (jObj O) GetString(key string) (string, error) {
 	switch jObj[key].(type) {
 	case string:
@@ -35,7 +35,7 @@ func (jObj O) GetString(key string) (string, error) {
 	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(jObj[key])))
 }
 
-// Get an int data from a json object. Return error, if key not exist or data type not int.
+// GetInt retrieves an int data from a json object. Return error, if key not exist or data type not int.
 func (jObj O) GetInt(key string) (int, error) {
 	switch jObj[key].(type) {
 	case int:
@@ -45,7 +45,7 @@ func (jObj O) GetInt(key string) (int, error) {
 	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(jObj[key])))
 }
 
-// Get an int64 data from a json object. Return error, if key not exist or data type not int64.
+// GetInt64 retrieves an int64 data from a json object. Return error, if key not exist or data type not int64.
 func (jObj O) GetInt64(key string) (int64, error) {
 	switch jObj[key].(type) {
 	case int64:
@@ -55,7 +55,7 @@ func (jObj O) GetInt64(key string) (int64, error) {
 	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(jObj[key])))
 }
 
-// Get a float64 data from a json object. Return error, if key not exist or data type not float64.
+// GetFloat64 retrieves a float64 data from a json object. Return error, if key not exist or data type not float64.
 func (jObj O) GetFloat64(key string) (float64, error) {
 	switch jObj[key].(type) {
 	case float64:
@@ -65,7 +65,7 @@ func (jObj O) GetFloat64(key string) (float64, error) {
 		reflect.TypeOf(jObj[key])))
 }
 
-// Get a boolean data from a json object. Return error, if key not exist or data type not boolean.
+// GetBoolean retrieves a boolean data from a json object. Return error, if key not exist or data type not boolean.
 func (jObj O) GetBoolean(key string) (bool, error) {
 	switch jObj[key].(type) {
 	case bool:
@@ -75,7 +75,8 @@ func (jObj O) GetBoolean(key string) (bool, error) {
 	return false, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(jObj[key])))
 }
 
-// Get a json object data from a json object. Return error, if key not exist or data type not json object.
+// GetObject retrieves a json object data from a json object. Return error,
+// if key not exist or data type not json object.
 func (jObj O) GetObject(key string) (value O, err error) {
 	switch jObj[key].(type) {
 	case map[string]interface{}:
@@ -94,7 +95,7 @@ func (jObj O) GetObject(key string) (value O, err error) {
 		key, reflect.TypeOf(jObj[key])))
 }
 
-// Get a json array data from a json object. Return error, if key not exist or data type not json array.
+// GetArray retrieves a json array data from a json object. Return error, if key not exist or data type not json array.
 func (jObj O) GetArray(key string) (newArray *A, err error) {
 	newArray = Array()
 
@@ -129,7 +130,7 @@ func (jObj O) Remove(key string) O {
 	return jObj
 }
 
-// Check the object has an element. Returns true if present, else false.
+// Has checks the object has an element in the name of the input string. Returns true if present, else false.
 func (jObj O) Has(key string) bool {
 	_, ok := jObj[key]
 	if ok {
@@ -138,12 +139,12 @@ func (jObj O) Has(key string) bool {
 	return false
 }
 
-// Generate a string representation of json object.
+// String on object generates a string representation of json object.
 func (jObj O) String() string {
 	return _string(jObj)
 }
 
-// Generate a string representation of json object with proper indent.
+// Indent on object generates a string representation of json object with proper indent.
 func (jObj O) Indent() string {
 	return indent(jObj)
 }
