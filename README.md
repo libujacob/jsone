@@ -2,7 +2,7 @@ Jsongo
 ===================
 
 **Single framework to parse and dynamically create/modify Json** objects.
-
+[![godoc](https://godoc.org/github.com/libujacob/jsongo?status.svg)](http://godoc.org/github.com/libujacob/jsongo)
 [![travis-ci](https://travis-ci.org/libujacob/jsongo.svg)](https://travis-ci.org/libujacob/jsongo) 
 [![codecov](https://codecov.io/gh/libujacob/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsongo)
 [![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsongo)](http://gocover.io/github.com/libujacob/jsongo)
