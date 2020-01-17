@@ -150,3 +150,124 @@ func Test_has_key_not_exists(t *testing.T) {
 		t.Errorf("Has key error, key exists.")
 	}
 }
+
+func Test_get_string(t *testing.T) {
+	name := "Jacob Varghese"
+	obj := Object().Put("owner", Object().Put("name", name).Put("experience", 23))
+
+	owner, err := obj.GetObject("owner")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	ownerName, err := owner.GetString("name")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	if name != ownerName {
+		t.Errorf("Value extraction missmatch:")
+	}
+
+	_, err = owner.GetString("experience")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+
+	_, err = owner.GetString("dept")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+}
+
+func Test_get_int(t *testing.T) {
+	age := 35
+	obj := Object().Put("owner", Object().Put("age", age).Put("experience", 12.4))
+
+	owner, err := obj.GetObject("owner")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	ownerAge, err := owner.GetInt("age")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	if age != ownerAge {
+		t.Errorf("Value extraction missmatch:")
+	}
+
+	_, err = owner.GetInt("experience")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+
+	_, err = owner.GetInt("dept")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+
+	_, err = owner.GetInt64("age")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+}
+
+func Test_get_float64(t *testing.T) {
+	experience := 12.8
+	obj := Object().Put("owner", Object().Put("name", "Jacob Varghese").Put("experience", experience))
+
+	owner, err := obj.GetObject("owner")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	ownerExperience, err := owner.GetFloat64("experience")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	if experience != ownerExperience {
+		t.Errorf("Value extraction missmatch:")
+	}
+
+	_, err = owner.GetFloat64("name")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+
+	_, err = owner.GetFloat64("dept")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+}
+
+func Test_get_boolean(t *testing.T) {
+	inRolls := true
+	obj := Object().Put("owner", Object().Put("name", "Jacob Varghese").Put("inRolls", inRolls))
+
+	owner, err := obj.GetObject("owner")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	ownerInRolls, err := owner.GetBoolean("inRolls")
+	if err != nil {
+		t.Errorf("Error not expected: %s.", err)
+	}
+
+	if inRolls != ownerInRolls {
+		t.Errorf("Value extraction missmatch:")
+	}
+
+	_, err = owner.GetBoolean("name")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+
+	_, err = owner.GetBoolean("dept")
+	if err == nil {
+		t.Errorf("Error expected but not happened: %s.", err)
+	}
+}
