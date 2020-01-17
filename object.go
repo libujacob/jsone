@@ -116,6 +116,15 @@ func (this O) Remove(key string) O {
 	return this
 }
 
+// Check the object has an element with name "key"
+func (this O) Has(key string) bool {
+	_, ok := this[key]
+	if ok {
+		return true
+	}
+	return false
+}
+
 func (this O) Indent() string {
 	return indent(this)
 }

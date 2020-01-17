@@ -1,14 +1,11 @@
 Jsongo
 ===================
 
-**Fluent API** to make it easier **to parse and create Json** objects.
+**Single framework to parse and dynamically create/modify Json** objects.
 
-This **single framework** allows you to **parse and dynamically create/modify
-Json** in GoLang.
-
-[![travis-ci](https://travis-ci.org/ricardolonga/jsongo.svg)](https://travis-ci.org/ricardolonga/jsongo) 
-[![codecov](https://codecov.io/gh/ricardolonga/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/ricardolonga/jsongo)
-[![goreportcard](https://goreportcard.com/badge/github.com/ricardolonga/jsongo)](http://gocover.io/github.com/ricardolonga/jsongo)
+[![travis-ci](https://travis-ci.org/libujacob/jsongo.svg)](https://travis-ci.org/libujacob/jsongo) 
+[![codecov](https://codecov.io/gh/libujacob/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsongo)
+[![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsongo)](http://gocover.io/github.com/libujacob/jsongo)
 
 Install
 -------------
@@ -62,6 +59,29 @@ json.Remove("skills")
 ##### To get a field of the object:
 ```
 json.Get("skills") // Return is interface{}.
+```
+##### To get string field of the object:
+```
+skill, err := json.GetString("skills") // Return is string, error
+```
+##### To get int/int64 field of the object:
+```
+count, err := json.GetInt("count") // Return is int, error
+bytes, err := json.GetInt64("bytes") // Return is int64, error
+```
+##### To get float64 field of the object:
+```
+average, err := json.GetFloat64("average") // Return is float64, error
+```
+##### To get boolean field of the object:
+```
+isDownSupport, err := json.GetBoolean("isDownloadSupported") // Return is boolean, error
+```
+##### To check the object has a key:
+```
+if json.Has("operations") { // Return is boolean
+    //do something
+}
 ```
 ##### To range over a array:
 ```
