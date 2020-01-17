@@ -13,6 +13,7 @@ type entry struct {
 	value interface{}
 }
 
+// NewStack create a new stack data structure object
 func NewStack() *stack {
 	return &stack{top: nil, len: 0}
 }

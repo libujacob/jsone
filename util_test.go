@@ -1,8 +1,8 @@
 package jsongo
 
 import (
-	"log"
 	"encoding/json"
+	"log"
 	"reflect"
 	"testing"
 )

@@ -167,7 +167,7 @@ func insertIntoStackTopValue(l *jsonListener, key string, value interface{}) {
 	}
 }
 
-// Parse the json object to generate the json map structure
+// ParseJsonObject parse the json object to generate the json map structure
 func ParseJsonObject(inData []byte) O {
 	// Setup the input
 	is := antlr.NewInputStream(string(inData))
@@ -185,7 +185,7 @@ func ParseJsonObject(inData []byte) O {
 	return listener.jsonObject
 }
 
-// Parse the json object to generate the json map structure
+// ParseJsonArray parse an array to generate the json map structure
 func ParseJsonArray(inData []byte) *A {
 	// Setup the input
 	is := antlr.NewInputStream(string(inData))

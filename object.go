@@ -6,89 +6,101 @@ import (
 	"reflect"
 )
 
+// Json Object.
 type O map[string]interface{}
 
+// Create a json object.
 func Object() O {
 	return O{}
 }
 
-func (this O) Put(key string, value interface{}) O {
-	this[key] = value
-	return this
+// Insert an element into a json object.
+func (jObj O) Put(key string, value interface{}) O {
+	jObj[key] = value
+	return jObj
 }
 
-func (this O) Get(key string) interface{} {
-	return this[key]
+// Retrieve an element from a json object. Type of the return value is not predefined,
+// caller has to check the return type.
+func (jObj O) Get(key string) interface{} {
+	return jObj[key]
 }
 
-func (this O) GetString(key string) (string, error) {
-	switch this[key].(type) {
+// Get a string data from a json object. Return error, if key not exist or data type not string.
+func (jObj O) GetString(key string) (string, error) {
+	switch jObj[key].(type) {
 	case string:
-		return this[key].(string), nil
+		return jObj[key].(string), nil
 	}
-	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(this[key])))
+	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetInt(key string) (int, error) {
-	switch this[key].(type) {
+// Get an int data from a json object. Return error, if key not exist or data type not int.
+func (jObj O) GetInt(key string) (int, error) {
+	switch jObj[key].(type) {
 	case int:
-		return this[key].(int), nil
+		return jObj[key].(int), nil
 	}
 
-	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(this[key])))
+	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetInt64(key string) (int64, error) {
-	switch this[key].(type) {
+// Get an int64 data from a json object. Return error, if key not exist or data type not int64.
+func (jObj O) GetInt64(key string) (int64, error) {
+	switch jObj[key].(type) {
 	case int64:
-		return this[key].(int64), nil
+		return jObj[key].(int64), nil
 	}
 
-	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(this[key])))
+	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetFloat64(key string) (float64, error) {
-	switch this[key].(type) {
+// Get a float64 data from a json object. Return error, if key not exist or data type not float64.
+func (jObj O) GetFloat64(key string) (float64, error) {
+	switch jObj[key].(type) {
 	case float64:
-		return this[key].(float64), nil
+		return jObj[key].(float64), nil
 	}
 	return 0.0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not float64", key,
-		reflect.TypeOf(this[key])))
+		reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetBoolean(key string) (bool, error) {
-	switch this[key].(type) {
+// Get a boolean data from a json object. Return error, if key not exist or data type not boolean.
+func (jObj O) GetBoolean(key string) (bool, error) {
+	switch jObj[key].(type) {
 	case bool:
-		return this[key].(bool), nil
+		return jObj[key].(bool), nil
 	}
 
-	return false, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(this[key])))
+	return false, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetObject(key string) (value O, err error) {
-	switch this[key].(type) {
+// Get a json object data from a json object. Return error, if key not exist or data type not json object.
+func (jObj O) GetObject(key string) (value O, err error) {
+	switch jObj[key].(type) {
 	case map[string]interface{}:
 		object := Object()
 
-		for k, v := range this[key].(map[string]interface{}) {
+		for k, v := range jObj[key].(map[string]interface{}) {
 			object.Put(k, v)
 		}
 
 		return object, nil
 	case O:
-		return this[key].(O), nil
+		return jObj[key].(O), nil
 	}
 
 	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.object",
-		key, reflect.TypeOf(this[key])))
+		key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) GetArray(key string) (newArray *A, err error) {
+// Get a json array data from a json object. Return error, if key not exist or data type not json array.
+func (jObj O) GetArray(key string) (newArray *A, err error) {
 	newArray = Array()
 
-	switch this[key].(type) {
+	switch jObj[key].(type) {
 	case []interface{}:
-		values := this[key].([]interface{})
+		values := jObj[key].([]interface{})
 
 		for _, value := range values {
 			newArray.Put(value)
@@ -96,7 +108,7 @@ func (this O) GetArray(key string) (newArray *A, err error) {
 
 		return newArray, nil
 	case []string:
-		values := this[key].([]string)
+		values := jObj[key].([]string)
 
 		for _, value := range values {
 			newArray.Put(value)
@@ -104,31 +116,34 @@ func (this O) GetArray(key string) (newArray *A, err error) {
 
 		return newArray, nil
 	case *A:
-		return this[key].(*A), nil
+		return jObj[key].(*A), nil
 	}
 
 	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.A or []interface{}",
-		key, reflect.TypeOf(this[key])))
+		key, reflect.TypeOf(jObj[key])))
 }
 
-func (this O) Remove(key string) O {
-	delete(this, key)
-	return this
+// Remove an element from a json object.
+func (jObj O) Remove(key string) O {
+	delete(jObj, key)
+	return jObj
 }
 
-// Check the object has an element with name "key"
-func (this O) Has(key string) bool {
-	_, ok := this[key]
+// Check the object has an element. Returns true if present, else false.
+func (jObj O) Has(key string) bool {
+	_, ok := jObj[key]
 	if ok {
 		return true
 	}
 	return false
 }
 
-func (this O) Indent() string {
-	return indent(this)
+// Generate a string representation of json object.
+func (jObj O) String() string {
+	return _string(jObj)
 }
 
-func (this O) String() string {
-	return _string(this)
+// Generate a string representation of json object with proper indent.
+func (jObj O) Indent() string {
+	return indent(jObj)
 }
