@@ -1,7 +1,6 @@
 package jsongo
 
 import (
-	"errors"
 	"fmt"
 	"reflect"
 )
@@ -32,7 +31,7 @@ func (jObj O) GetString(key string) (string, error) {
 	case string:
 		return jObj[key].(string), nil
 	}
-	return "", errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(jObj[key])))
+	return "", fmt.Errorf("casting error[%s]. Interface is %s, not string", key, reflect.TypeOf(jObj[key]))
 }
 
 // GetInt retrieves an int data from a json object. Return error, if key not exist or data type not int.
@@ -42,7 +41,7 @@ func (jObj O) GetInt(key string) (int, error) {
 		return jObj[key].(int), nil
 	}
 
-	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(jObj[key])))
+	return 0, fmt.Errorf("casting error[%s]. Interface is %s, not int", key, reflect.TypeOf(jObj[key]))
 }
 
 // GetInt64 retrieves an int64 data from a json object. Return error, if key not exist or data type not int64.
@@ -52,7 +51,7 @@ func (jObj O) GetInt64(key string) (int64, error) {
 		return jObj[key].(int64), nil
 	}
 
-	return 0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(jObj[key])))
+	return 0, fmt.Errorf("casting error[%s]. Interface is %s, not int64", key, reflect.TypeOf(jObj[key]))
 }
 
 // GetFloat64 retrieves a float64 data from a json object. Return error, if key not exist or data type not float64.
@@ -61,8 +60,8 @@ func (jObj O) GetFloat64(key string) (float64, error) {
 	case float64:
 		return jObj[key].(float64), nil
 	}
-	return 0.0, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not float64", key,
-		reflect.TypeOf(jObj[key])))
+	return 0.0, fmt.Errorf("casting error[%s]. Interface is %s, not float64", key,
+		reflect.TypeOf(jObj[key]))
 }
 
 // GetBoolean retrieves a boolean data from a json object. Return error, if key not exist or data type not boolean.
@@ -72,7 +71,7 @@ func (jObj O) GetBoolean(key string) (bool, error) {
 		return jObj[key].(bool), nil
 	}
 
-	return false, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(jObj[key])))
+	return false, fmt.Errorf("casting error[%s]. Interface is %s, not boolean", key, reflect.TypeOf(jObj[key]))
 }
 
 // GetObject retrieves a json object data from a json object. Return error,
@@ -91,8 +90,8 @@ func (jObj O) GetObject(key string) (value O, err error) {
 		return jObj[key].(O), nil
 	}
 
-	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.object",
-		key, reflect.TypeOf(jObj[key])))
+	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsongo.object",
+		key, reflect.TypeOf(jObj[key]))
 }
 
 // GetArray retrieves a json array data from a json object. Return error, if key not exist or data type not json array.
@@ -120,8 +119,8 @@ func (jObj O) GetArray(key string) (newArray *A, err error) {
 		return jObj[key].(*A), nil
 	}
 
-	return nil, errors.New(fmt.Sprintf("Casting error[%s]. Interface is %s, not jsongo.A or []interface{}",
-		key, reflect.TypeOf(jObj[key])))
+	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsongo.A or []interface{}",
+		key, reflect.TypeOf(jObj[key]))
 }
 
 // Remove an element from a json object.

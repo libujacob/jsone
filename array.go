@@ -1,12 +1,11 @@
 package jsongo
 
 import (
-	"errors"
 	"fmt"
 	"reflect"
 )
 
-// A is a Json Array representation.
+// A A represents Json Array.
 type A []interface{}
 
 // Array creates a json array.
@@ -39,7 +38,7 @@ func (jArray *A) Size() int {
 func (jArray *A) OfString() (values []string, err error) {
 	for _, value := range *jArray {
 		if reflect.TypeOf(value).String() != "string" {
-			return nil, errors.New(fmt.Sprintf("Value is %s, not a string.", reflect.TypeOf(value)))
+			return nil, fmt.Errorf("value is %s, not a string", reflect.TypeOf(value))
 		}
 
 		values = append(values, value.(string))

@@ -1,31 +1,31 @@
 package jsongo
 
-// Stack
-type stack struct {
+// Stack data structure
+type Stack struct {
 	top *entry
 	len int
 }
 
 // Stack entry
 type entry struct {
-	stack *stack
+	stack *Stack
 	next  *entry
 	value interface{}
 }
 
-// NewStack create a new stack data structure object
-func NewStack() *stack {
-	return &stack{top: nil, len: 0}
+// NewStack create a new Stack data structure object
+func NewStack() *Stack {
+	return &Stack{top: nil, len: 0}
 }
 
 // Push new entry
-func (s *stack) Push(value interface{}) {
+func (s *Stack) Push(value interface{}) {
 	s.top = &entry{stack: s, next: s.top, value: value}
 	s.len++
 }
 
-// POP out an entry
-func (s *stack) Pop() interface{} {
+// Pop out an entry
+func (s *Stack) Pop() interface{} {
 	if s.len > 0 {
 		value := s.top.value
 		s.top = s.top.next
@@ -35,8 +35,8 @@ func (s *stack) Pop() interface{} {
 	return nil
 }
 
-// POP out an entry
-func (s *stack) Top() interface{} {
+// Top to get the last inserted an entry
+func (s *Stack) Top() interface{} {
 	if s.len > 0 {
 		return s.top.value
 	}

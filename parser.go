@@ -13,7 +13,7 @@ type jsonListener struct {
 	*json.BaseJSONListener // https://godoc.org/bramp.net/antlr4/json#BaseJSONListener
 	jsonObject             O
 	jsonArray              *A
-	jsonEntryStack         *stack
+	jsonEntryStack         *Stack
 }
 
 func (l *jsonListener) EnterJson(ctx *json.JsonContext) {
@@ -37,7 +37,7 @@ func (l *jsonListener) ExitObj(ctx *json.ObjContext) {
 	// both the cases
 	value := l.jsonEntryStack.Pop()
 
-	// Popping the out the key from the stack to fill the object
+	// Popping the out the key from the Stack to fill the object
 	key := getKeyFromStack(l)
 	insertIntoStackTopValue(l, key, value)
 }
@@ -64,7 +64,7 @@ func (l *jsonListener) ExitArray(ctx *json.ArrayContext) {
 	// both cases.
 	value := l.jsonEntryStack.Pop()
 
-	// Popping the out the key from the stack to fill the object
+	// Popping the out the key from the Stack to fill the object
 	key := getKeyFromStack(l)
 
 	insertIntoStackTopValue(l, key, value)
@@ -74,7 +74,7 @@ func (l *jsonListener) EnterValue(ctx *json.ValueContext) {
 }
 
 func (l *jsonListener) ExitValue(ctx *json.ValueContext) {
-	// Popping the out the key from the stack to fill the object
+	// Popping the out the key from the Stack to fill the object
 	key := getKeyFromStack(l)
 
 	if ctx.Array() != nil || ctx.Obj() != nil {
@@ -131,29 +131,29 @@ func (l *jsonListener) ExitValue(ctx *json.ValueContext) {
 	}
 }
 
-// Get next key from the stack
+// Get next key from the Stack
 func getKeyFromStack(l *jsonListener) string {
 	key := ""
-	// Popping the out the key from the stack to fill the object
+	// Popping the out the key from the Stack to fill the object
 	switch l.jsonEntryStack.Top().(type) {
 	case string:
 		last := l.jsonEntryStack.Pop()
 		if last == nil {
-			log.Panic("No data in stack!")
+			log.Panic("No data in Stack!")
 		}
 		key = last.(string)
 	}
 	return key
 }
 
-// Insert the value in to the next object into the stack
+// Insert the value in to the next object into the Stack
 func insertIntoStackTopValue(l *jsonListener, key string, value interface{}) {
 	switch l.jsonEntryStack.Top().(type) {
 	case O:
 		if key != "" {
 			l.jsonEntryStack.Top().(O).Put(key, value)
 		} else {
-			log.Panic("No key string in stack to insert the array value!")
+			log.Panic("No key string in Stack to insert the array value!")
 		}
 		break
 
