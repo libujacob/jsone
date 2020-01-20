@@ -1,4 +1,4 @@
-package jsongo
+package jsone
 
 import (
 	"fmt"
@@ -90,7 +90,7 @@ func (jObj O) GetObject(key string) (value O, err error) {
 		return jObj[key].(O), nil
 	}
 
-	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsongo.object",
+	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsone.object",
 		key, reflect.TypeOf(jObj[key]))
 }
 
@@ -119,7 +119,7 @@ func (jObj O) GetArray(key string) (newArray *A, err error) {
 		return jObj[key].(*A), nil
 	}
 
-	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsongo.A or []interface{}",
+	return nil, fmt.Errorf("casting error[%s]. Interface is %s, not jsone.A or []interface{}",
 		key, reflect.TypeOf(jObj[key]))
 }
 

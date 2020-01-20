@@ -1,4 +1,4 @@
-package jsongo
+package jsone
 
 import (
 	"encoding/json"

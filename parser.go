@@ -1,4 +1,4 @@
-package jsongo
+package jsone
 
 import (
 	"log"
@@ -24,7 +24,7 @@ func (l *jsonListener) ExitJson(ctx *json.JsonContext) {
 }
 
 func (l *jsonListener) EnterObj(ctx *json.ObjContext) {
-	if l.jsonEntryStack.len == 0 {
+	if l.jsonEntryStack.length == 0 {
 		l.jsonObject = Object()
 		l.jsonEntryStack.Push(l.jsonObject)
 	} else {
@@ -51,7 +51,7 @@ func (l *jsonListener) ExitPair(ctx *json.PairContext) {
 }
 
 func (l *jsonListener) EnterArray(ctx *json.ArrayContext) {
-	if l.jsonEntryStack.len == 0 {
+	if l.jsonEntryStack.length == 0 {
 		l.jsonArray = Array()
 		l.jsonEntryStack.Push(l.jsonArray)
 	} else {
