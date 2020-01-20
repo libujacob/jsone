@@ -1,17 +1,17 @@
-Jsongo
+JsonE
 ===================
 
 **Single framework to parse and dynamically create/modify Json** objects.
 
-[![godoc](https://godoc.org/github.com/libujacob/jsongo?status.svg)](http://godoc.org/github.com/libujacob/jsongo)
-[![travis-ci](https://travis-ci.org/libujacob/jsongo.svg)](https://travis-ci.org/libujacob/jsongo) 
-[![codecov](https://codecov.io/gh/libujacob/jsongo/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsongo)
-[![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsongo)](http://gocover.io/github.com/libujacob/jsongo)
+[![godoc](https://godoc.org/github.com/libujacob/jsone?status.svg)](http://godoc.org/github.com/libujacob/jsone)
+[![travis-ci](https://travis-ci.org/libujacob/jsone.svg)](https://travis-ci.org/libujacob/jsone) 
+[![codecov](https://codecov.io/gh/libujacob/jsone/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsone)
+[![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsone)](http://gocover.io/github.com/libujacob/jsone)
 
 Install
 -------------
 ```
-go get github.com/libujacob/jsongo
+go get github.com/libujacob/jsone
 ```
 
 Usage
@@ -33,7 +33,7 @@ To create this:
 Do this:  
 ```
 import (
-    j "github.com/libujacob/jsongo"
+    j "github.com/libujacob/jsone"
 )
 
 json := j.Object().Put("name", "Ricardo Longa").
@@ -108,7 +108,7 @@ said operations on the return value.
 ##### Parse a Json Object string:
 ```
 import (
-    j "github.com/libujacob/jsongo"
+    j "github.com/libujacob/jsone"
 )
 
 parsedObject := j.ParseJsonObject([]byte(`{"type": "oper", "nameList":["John", "Dan"], "id":205896}`))
@@ -135,7 +135,7 @@ parsedObject.Put("dept", "Operations")
 ##### Parse a Json Array string:
 ```
 import (
-    j "github.com/libujacob/jsongo"
+    j "github.com/libujacob/jsone"
 )
 
 parsedArray := j.ParseJsonArray([]byte(`[{"name": "John", "id": 567314}, {"name": "Dan", "id": 589725}]`))
@@ -174,4 +174,4 @@ Modified work Copyright (c) 2019 Libu Jacob Varghese.
 
 Using bramp.net/antlr4/json and antlr for json parsing.
 
-Jsongo is licensed under the **Apache License Version 2.0**. See the LICENSE file for more information.
+JsonE is licensed under the **Apache License Version 2.0**. See the LICENSE file for more information.
