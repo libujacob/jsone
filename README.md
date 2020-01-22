@@ -6,7 +6,7 @@ JsonE
 [![godoc](https://godoc.org/github.com/libujacob/jsone?status.svg)](http://godoc.org/github.com/libujacob/jsone)
 [![travis-ci](https://travis-ci.org/libujacob/jsone.svg)](https://travis-ci.org/libujacob/jsone) 
 [![codecov](https://codecov.io/gh/libujacob/jsone/branch/master/graph/badge.svg)](https://codecov.io/gh/libujacob/jsone)
-[![goreportcard](https://goreportcard.com/badge/github.com/libujacob/jsone)](http://gocover.io/github.com/libujacob/jsone)
+[![Go Report Card](https://goreportcard.com/badge/github.com/libujacob/jsone)](https://goreportcard.com/report/github.com/libujacob/jsone)
 
 Install
 -------------
