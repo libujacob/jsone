@@ -170,7 +170,7 @@ parsedArray.Put(j.Object().Put("name", "Tom").Put("id", 589289)
 Copyright
 -------------
 Original work Copyright (c) 2015 Ricardo Longa.  
-Modified work Copyright (c) 2019 Libu Jacob Varghese.  
+Modified work Copyright (c) 2020 Libu Jacob Varghese.  
 
 Using bramp.net/antlr4/json and antlr for json parsing.
 

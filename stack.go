@@ -1,30 +1,30 @@
 package jsone
 
-// Stack data structure
+// Stack data structure.
 type Stack struct {
 	top    *entry
 	length int
 }
 
-// Stack entry
+// Stack entry data structure.
 type entry struct {
 	stack *Stack
 	next  *entry
 	value interface{}
 }
 
-// NewStack create a new Stack data structure object
+// NewStack creates a new Stack data structure object.
 func NewStack() *Stack {
 	return &Stack{top: nil, length: 0}
 }
 
-// Push new entry
+// Push a new entry to the stack.
 func (s *Stack) Push(value interface{}) {
 	s.top = &entry{stack: s, next: s.top, value: value}
 	s.length++
 }
 
-// Pop out an entry
+// Pop out an entry from the stack.
 func (s *Stack) Pop() interface{} {
 	if s.length > 0 {
 		value := s.top.value
@@ -35,7 +35,7 @@ func (s *Stack) Pop() interface{} {
 	return nil
 }
 
-// Top to get the last inserted an entry
+// Top gets the last inserted entry with out deleting from the stack.
 func (s *Stack) Top() interface{} {
 	if s.length > 0 {
 		return s.top.value
@@ -43,7 +43,7 @@ func (s *Stack) Top() interface{} {
 	return nil
 }
 
-// Size returns the length of the stack
+// Size returns the number of the elements in the stack.
 func (s *Stack) Size() int {
 	return s.length
 }
