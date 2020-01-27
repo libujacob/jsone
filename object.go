@@ -123,6 +123,18 @@ func (jObj O) GetArray(key string) (newArray *A, err error) {
 		key, reflect.TypeOf(jObj[key]))
 }
 
+// Keys returns the list of keys in the current object.
+func (jObj O) Keys() (objKeys []string) {
+	keys := make([]string, 0)
+	if nil == jObj {
+		return keys
+	}
+	for k, _ := range jObj {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
 // Remove an element from a json object.
 func (jObj O) Remove(key string) O {
 	delete(jObj, key)

@@ -271,3 +271,27 @@ func Test_get_boolean(t *testing.T) {
 		t.Errorf("Error expected but not happened: %s.", err)
 	}
 }
+
+func Test_Keys(t *testing.T) {
+	obj := Object().Put("owner", Object().Put("name", "Jacob Varghese").Put("inRolls", true))
+
+	// Case1: One key
+	check(t, []string{"owner"}, obj.Keys())
+
+	// Case2: 2 Keys
+	owner, _ := obj.GetObject("owner")
+	fieldCount := 0
+	for _, k := range owner.Keys() {
+		if k != "name" && k != "inRolls" {
+			t.Errorf("Invalid entry in the return list: %s.", k)
+		} else {
+			fieldCount++
+		}
+	}
+	check(t, fieldCount, 2)
+
+	// Case3: Nil input and empty key
+	nilSample, _ := obj.GetObject("sample")
+	check(t, []string{}, nilSample.Keys())
+
+}
