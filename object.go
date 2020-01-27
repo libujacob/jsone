@@ -129,7 +129,7 @@ func (jObj O) Keys() (objKeys []string) {
 	if nil == jObj {
 		return keys
 	}
-	for k, _ := range jObj {
+	for k := range jObj {
 		keys = append(keys, k)
 	}
 	return keys
@@ -144,10 +144,7 @@ func (jObj O) Remove(key string) O {
 // Has checks the object has an element in the name of the input string. Returns true if present, else false.
 func (jObj O) Has(key string) bool {
 	_, ok := jObj[key]
-	if ok {
-		return true
-	}
-	return false
+	return ok
 }
 
 // String on object generates a string representation of json object.

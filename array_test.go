@@ -23,7 +23,7 @@ func Test_array_size_must_be_3(t *testing.T) {
 func Test_range_array(t *testing.T) {
 	results := Array().Put("Golang").Put("Android").Put("Java")
 
-	expect := make(map[int]string, 0)
+	expect := make(map[int]string, 3)
 	expect[0] = "Golang"
 	expect[1] = "Android"
 	expect[2] = "Java"

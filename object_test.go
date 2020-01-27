@@ -86,7 +86,7 @@ func Test_get_object_without_casting_error(t *testing.T) {
 		"nome": "Ricardo Longa",
 	})
 
-	obj, err = obj.GetObject("owner")
+	_, err = obj.GetObject("owner")
 	if err != nil {
 		t.Errorf("2Casting error not expected.")
 	}

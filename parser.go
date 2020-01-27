@@ -171,15 +171,12 @@ func insertIntoStackTopValue(l *jsonListener, key string, value interface{}) {
 		} else {
 			log.Panic("No key string in Stack to insert the array value!")
 		}
-		break
 
 	case *A:
 		l.jsonEntryStack.Top().(*A).Put(value)
-		break
 
 	default:
 		// log.Print("Not a proper data type expected here")
-		break
 	}
 }
 
